@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
         Jump();
 
-        Debug.Log(rb.linearVelocity);
     }
 
     void Move(float horizontalMovement)
@@ -46,8 +45,9 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // Detectar si se presiona la tecla Espacio para saltar
-        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.linearVelocity.y) < 0.001f)
         {
+            Debug.Log("pressed and velocity low");
             rb.linearVelocity = Vector2.up * jumpForce;
         }
 
