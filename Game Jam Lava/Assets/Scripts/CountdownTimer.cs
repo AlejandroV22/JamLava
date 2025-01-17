@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; // Importa el espacio de nombres para TextMeshPro
+using TMPro; // Para TextMeshPro
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -7,7 +7,8 @@ public class CountdownTimer : MonoBehaviour
     private float timeRemaining; // Tiempo restante
     private bool isCountingDown = false; // ¿Está corriendo el contador?
 
-    public TextMeshProUGUI countdownText; // Usamos TextMeshProUGUI para mostrar el texto
+    public TextMeshProUGUI countdownText; // Para mostrar el texto
+    public LavaBehaviour lava; // Referencia al script de LavaBehaviour
 
     void Start()
     {
@@ -23,7 +24,8 @@ public class CountdownTimer : MonoBehaviour
             if (timeRemaining <= 0)
             {
                 timeRemaining = 0;
-                // Aquí deberías activar la lava para que suba instantáneamente
+                // Llamamos a InstantKill cuando el contador llegue a 0
+                lava.InstantKill();  
                 Debug.Log("¡Tiempo agotado! La lava sube instantáneamente.");
             }
 
