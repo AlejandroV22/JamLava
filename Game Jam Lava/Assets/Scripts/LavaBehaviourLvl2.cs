@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LavaBehaviour : MonoBehaviour
+public class LavaBehaviourLvl2 : MonoBehaviour
 {
     // Amplitud del movimiento (distancia desde el punto medio hasta los extremos)
     public float amplitude = 2f;
