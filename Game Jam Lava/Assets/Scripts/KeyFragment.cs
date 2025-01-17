@@ -1,22 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaBehaviourLvl2 : MonoBehaviour
+public class KeyFragment : MonoBehaviour
 {
-    // Amplitud del movimiento (distancia desde el punto medio hasta los extremos)
+        // Amplitud del movimiento (distancia desde el punto medio hasta los extremos)
     public float amplitude = 2f;
 
     // Frecuencia del movimiento (número de ciclos por segundo)
     public float frequency = 1f;
 
     // Punto medio en el eje Y (alrededor del cual oscilará el objeto)
-    public float yOffset = 0f;
+    private float yOffset = 0f;
 
     // Tiempo acumulado para calcular la posición
     private float time;
 
+    void Start()
+    {
+        yOffset = transform.position.y;
+    }
+
     void Update()
     {
         Oscilate();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,9 +34,9 @@ public class LavaBehaviourLvl2 : MonoBehaviour
         {
             // Aquí puedes manejar lo que pasa cuando el jugador toca la lava
 
-            // Reiniciar la escena
-            UnityEngine.SceneManagement.SceneManager.LoadScene(
-                UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            Debug.Log("you got me");
+
+            Destroy(gameObject);
         }
     }
 
