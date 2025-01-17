@@ -1,38 +1,45 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using TMPro; // Importa el espacio de nombres para TextMeshPro
 
 public class CountdownTimer : MonoBehaviour
 {
-    public float countdownTime = 10f; // Tiempo inicial del contador
-    public TextMeshProUGUI countdownText;
-    public LavaBehaviour lava; // Referencia al script de la lava
+    public float startTime = 10f; // Tiempo inicial
+    private float timeRemaining; // Tiempo restante
+    private bool isCountingDown = false; // ¿Está corriendo el contador?
 
-    private bool countdownEnded = false;
+    public TextMeshProUGUI countdownText; // Usamos TextMeshProUGUI para mostrar el texto
+
+    void Start()
+    {
+        timeRemaining = startTime;
+        UpdateCountdownText();
+    }
 
     void Update()
     {
-        if (countdownTime > 0)
+        if (isCountingDown)
         {
-            // Reducir el tiempo restante
-            countdownTime -= Time.deltaTime;
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining <= 0)
+            {
+                timeRemaining = 0;
+                // Aquí deberías activar la lava para que suba instantáneamente
+                Debug.Log("¡Tiempo agotado! La lava sube instantáneamente.");
+            }
 
-            // Actualizar el texto del temporizador en pantalla
-            countdownText.text = Mathf.Ceil(countdownTime).ToString();
-        }
-        else if (!countdownEnded)
-        {
-            // Detener el contador y subir la lava
-            countdownEnded = true;
-            TriggerLavaRise();
+            UpdateCountdownText();
         }
     }
 
-    void TriggerLavaRise()
+    void UpdateCountdownText()
     {
-        // Hacer que la lava suba rápidamente
-        lava.InstantKill();
-        Debug.Log("El tiempo se acabó. ¡La lava sube instantáneamente!");
+        // Actualiza el texto con el tiempo restante
+        countdownText.text = Mathf.Ceil(timeRemaining).ToString();
+    }
+
+    // Método para iniciar el contador
+    public void StartCountdown()
+    {
+        isCountingDown = true;
     }
 }
-
